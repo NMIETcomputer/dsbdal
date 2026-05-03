@@ -1,7 +1,13 @@
 Perfect! Here are all 3 files. Write them one by one in Ubuntu terminal.
 
 ---
-
+<br>
+college_chatbot/
+├── bot.py
+├── app.py
+└── templates/
+    └── index.html
+<br>
 ## Step 1 — Open Terminal and Create Folder
 
 ```bash

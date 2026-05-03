@@ -1,6 +1,3 @@
-Perfect! Here are all 3 files. Write them one by one in Ubuntu terminal.
-
----
 <br>
 college_chatbot/
 ├── bot.py
@@ -8,25 +5,10 @@ college_chatbot/
 └── templates/
     └── index.html
 <br>
-## Step 1 — Open Terminal and Create Folder
-
-```bash
-> mkdir college_chatbot
-> cd college_chatbot
-> mkdir templates
-```
-
----
-
 ## Step 2 — Create `bot.py`
 
-```bash
-> nano bot.py
-```
 
-Paste this:
-
-```python
+```bot.py
 <br><br>
 def get_response(message):
     message = message.lower()
@@ -55,19 +37,10 @@ def get_response(message):
         return "Sorry, I did not understand. Please ask about fees, admission, courses, hostel, or timing."
 ```
 
-Press **Ctrl+O → Enter → Ctrl+X**
-
----
-
 ## Step 3 — Create `app.py`
 
-```bash
-nano app.py
-```
-
-Paste this:
-
-```python
+```app.py
+<br><br>
 from flask import Flask, render_template, request
 from bot import get_response
 
@@ -85,21 +58,12 @@ def chatbot_response():
 
 if __name__ == "__main__":
     app.run(debug=True)
-```
 
-Press **Ctrl+O → Enter → Ctrl+X**
-
----
 
 ## Step 4 — Create `index.html`
 
-```bash
-nano templates/index.html
-```
 
-Paste this:
-
-```html
+```index.html
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,26 +112,15 @@ Paste this:
     </script>
 </body>
 </html>
-```
-
-Press **Ctrl+O → Enter → Ctrl+X**
-
----
 
 ## Step 5 — Install Flask & Run
 
-```bash
-pip3 install flask
-python3 app.py
-```
+
+> pip3 install flask
+> python3 app.py
+
 
 Then open browser and go to:
 ```
 http://127.0.0.1:5000
-```
 
----
-
-Your chatbot will look clean and work perfectly! 🎉 Try asking: **"What is the fee?"** or **"Tell me about admission"**
-
-**Tell me when it's running!** ✅

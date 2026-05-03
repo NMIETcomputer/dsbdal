@@ -1,0 +1,26 @@
+def selection_sort(arr):
+    n = len(arr)
+    
+    print("Original array:", arr)
+    print()
+    
+    for i in range(n - 1):
+        min_index = i
+        
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        
+        arr[min_index], arr[i] = arr[i], arr[min_index]
+        
+        print(f"Step {i + 1}: {arr}  → placed {arr[i]} at index {i}")
+    
+    return arr
+
+arr = [64, 25, 12, 22, 11]
+
+print("=== Greedy Selection Sort ===")
+print()
+sorted_arr = selection_sort(arr)
+print()
+print("Final Sorted Array:", sorted_arr)

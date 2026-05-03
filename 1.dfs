@@ -1,0 +1,26 @@
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+visited = set()
+
+def dfs(node):
+    if node not in visited:
+        print("Visited:", node)
+        visited.add(node)
+        for neighbour in graph[node]:
+            dfs(neighbour)
+
+print("DFS Traversal starting from A:")
+dfs('A')
+
+#    A
+#   / \
+#  B   C
+# / \   \
+#D   E - F

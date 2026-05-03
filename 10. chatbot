@@ -1,0 +1,167 @@
+Perfect! Here are all 3 files. Write them one by one in Ubuntu terminal.
+
+---
+
+## Step 1 — Open Terminal and Create Folder
+
+```bash
+> mkdir college_chatbot
+> cd college_chatbot
+> mkdir templates
+```
+
+---
+
+## Step 2 — Create `bot.py`
+
+```bash
+> nano bot.py
+```
+
+Paste this:
+
+```python
+<br><br>
+def get_response(message):
+    message = message.lower()
+
+    if "fee" in message:
+        return "The annual fee is Rs. 50,000 per year."
+    elif "admission" in message:
+        return "Admissions are open from June to August every year."
+    elif "course" in message or "branch" in message:
+        return "We offer CS, IT, Mechanical, Civil and Electronics branches."
+    elif "hostel" in message:
+        return "Yes, hostel facility is available for boys and girls separately."
+    elif "timing" in message or "time" in message:
+        return "College timings are 9:00 AM to 5:00 PM."
+    elif "principal" in message:
+        return "Our principal is Dr. A. B. Sharma."
+    elif "address" in message or "location" in message:
+        return "We are located at MG Road, Pune, Maharashtra."
+    elif "phone" in message or "contact" in message:
+        return "You can contact us at 020-12345678."
+    elif "hello" in message or "hi" in message:
+        return "Hello! Welcome to ABC College. How can I help you?"
+    elif "bye" in message:
+        return "Thank you for contacting ABC College. Goodbye!"
+    else:
+        return "Sorry, I did not understand. Please ask about fees, admission, courses, hostel, or timing."
+```
+
+Press **Ctrl+O → Enter → Ctrl+X**
+
+---
+
+## Step 3 — Create `app.py`
+
+```bash
+nano app.py
+```
+
+Paste this:
+
+```python
+from flask import Flask, render_template, request
+from bot import get_response
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/get", methods=["POST"])
+def chatbot_response():
+    user_msg = request.form["msg"]
+    response = get_response(user_msg)
+    return response
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+Press **Ctrl+O → Enter → Ctrl+X**
+
+---
+
+## Step 4 — Create `index.html`
+
+```bash
+nano templates/index.html
+```
+
+Paste this:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Chatbot</title>
+    <style>
+        body { font-family: Arial; background: #f2f2f2; }
+        h2 { text-align: center; color: #333; }
+        #chat-box {
+            width: 500px; height: 400px;
+            border: 1px solid #ccc; background: white;
+            margin: 20px auto; padding: 10px;
+            overflow-y: scroll;
+        }
+        .user { color: blue; }
+        .bot { color: green; }
+        #input-area { text-align: center; margin-top: 10px; }
+        input[type=text] { width: 350px; padding: 8px; }
+        button { padding: 8px 16px; background: #4CAF50; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h2>ABC College Enquiry Chatbot</h2>
+    <div id="chat-box"></div>
+    <div id="input-area">
+        <input type="text" id="msg" placeholder="Ask about fees, admission, courses..."/>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        function sendMessage() {
+            var msg = document.getElementById("msg").value;
+            if (msg.trim() == "") return;
+            var box = document.getElementById("chat-box");
+            box.innerHTML += "<p class='user'><b>You:</b> " + msg + "</p>";
+            fetch("/get", {
+                method: "POST",
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: "msg=" + encodeURIComponent(msg)
+            })
+            .then(res => res.text())
+            .then(data => {
+                box.innerHTML += "<p class='bot'><b>Bot:</b> " + data + "</p>";
+                box.scrollTop = box.scrollHeight;
+            });
+            document.getElementById("msg").value = "";
+        }
+    </script>
+</body>
+</html>
+```
+
+Press **Ctrl+O → Enter → Ctrl+X**
+
+---
+
+## Step 5 — Install Flask & Run
+
+```bash
+pip3 install flask
+python3 app.py
+```
+
+Then open browser and go to:
+```
+http://127.0.0.1:5000
+```
+
+---
+
+Your chatbot will look clean and work perfectly! 🎉 Try asking: **"What is the fee?"** or **"Tell me about admission"**
+
+**Tell me when it's running!** ✅

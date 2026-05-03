@@ -72,3 +72,17 @@ for u, v, w in mst:
     print(f"  {u} -- {v}  weight: {w}")
 print()
 print("Total MST cost:", total)
+
+'''
+A
+   / \
+  4   2
+ /     \
+B --1-- C
+|       |
+5      10
+|       |
+D --2-- E
+ \     /
+   6--B
+'''

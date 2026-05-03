@@ -1,15 +1,18 @@
-<br>
+
 college_chatbot/
 ├── bot.py
 ├── app.py
 └── templates/
     └── index.html
-<br>
-## Step 2 — Create `bot.py`
+
+## Step 1 — Create `bot.py`
 
 
 ```bot.py
-<br><br>
+
+
+
+
 def get_response(message):
     message = message.lower()
 
@@ -35,12 +38,18 @@ def get_response(message):
         return "Thank you for contacting ABC College. Goodbye!"
     else:
         return "Sorry, I did not understand. Please ask about fees, admission, courses, hostel, or timing."
-```
+
+
+
+
 
 ## Step 3 — Create `app.py`
 
 ```app.py
-<br><br>
+
+
+
+
 from flask import Flask, render_template, request
 from bot import get_response
 
@@ -60,10 +69,18 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
+
+
+
+
 ## Step 4 — Create `index.html`
 
 
 ```index.html
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,6 +129,12 @@ if __name__ == "__main__":
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 ## Step 5 — Install Flask & Run
 

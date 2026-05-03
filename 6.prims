@@ -1,0 +1,57 @@
+import heapq
+
+def prims(graph, start):
+    visited = set()
+    mst = []
+    total_cost = 0
+
+    min_heap = [(0, start, start)]
+
+    print("Starting Prim's MST from node:", start)
+    print()
+
+    while min_heap:
+        weight, u, v = heapq.heappop(min_heap)
+
+        if v in visited:
+            print(f"✘ Skipped: {u} -- {v}  weight: {weight} (already visited)")
+            continue
+
+        visited.add(v)
+
+        if u != v:
+            mst.append((u, v, weight))
+            total_cost += weight
+            print(f"✔ Added edge: {u} -- {v}  weight: {weight}")
+
+        for neighbour, w in graph[v]:
+            if neighbour not in visited:
+                heapq.heappush(min_heap, (w, v, neighbour))
+
+    return mst, total_cost
+
+
+graph = {
+    'A': [('B', 4), ('C', 2)],
+    'B': [('A', 4), ('C', 1), ('D', 5), ('E', 6)],
+    'C': [('A', 2), ('B', 1), ('D', 8), ('E', 10)],
+    'D': [('B', 5), ('C', 8), ('E', 2)],
+    'E': [('B', 6), ('C', 10), ('D', 2)]
+}
+
+print("=== Prim's MST (Greedy Algorithm) ===")
+print()
+print("Graph:")
+for node in graph:
+    print(f"  {node} --> {graph[node]}")
+print()
+
+mst, total = prims(graph, 'A')
+
+print()
+print("=== Minimum Spanning Tree ===")
+for u, v, w in mst:
+    print(f"  {u} -- {v}  weight: {w}")
+print()
+print("Total MST cost:", total)
+

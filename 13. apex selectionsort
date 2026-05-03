@@ -1,0 +1,40 @@
+public class SelectionSort {
+    
+    public static void sortArray(Integer[] arr) {
+        Integer n = arr.size();
+        
+        for (Integer i = 0; i < n - 1; i++) {
+            Integer minIndex = i;
+            
+            for (Integer j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            
+            // Swap
+            Integer temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+    }
+    
+    public static void main() {
+        Integer[] arr = new Integer[]{64, 25, 12, 22, 11};
+        
+        System.debug('Before sorting: ' + arr);
+        
+        sortArray(arr);
+        
+        System.debug('After sorting: ' + arr);
+    }
+}
+
+
+
+
+
+
+
+
+debug: SelectionSort.main();

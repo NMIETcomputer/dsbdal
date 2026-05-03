@@ -1,0 +1,66 @@
+import heapq
+
+def dijkstra(graph, start):
+    dist = {node: float('inf') for node in graph}
+    dist[start] = 0
+
+    min_heap = [(0, start)]
+
+    came_from = {start: None}
+
+    print(f"Starting Dijkstra from node: {start}")
+    print()
+
+    while min_heap:
+        current_dist, u = heapq.heappop(min_heap)
+
+        if current_dist > dist[u]:
+            continue
+
+        print(f"Exploring node: {u}  (distance from {start}: {current_dist})")
+
+        for neighbour, weight in graph[u]:
+            new_dist = dist[u] + weight
+
+            if new_dist < dist[neighbour]:
+                dist[neighbour] = new_dist
+                came_from[neighbour] = u
+                heapq.heappush(min_heap, (new_dist, neighbour))
+                print(f"  ✔ Updated: {start} --> {neighbour}  new distance: {new_dist}")
+
+    return dist, came_from
+
+
+def get_path(came_from, start, goal):
+    path = []
+    current = goal
+    while current is not None:
+        path.append(current)
+        current = came_from.get(current)
+    path.reverse()
+    return path
+
+
+graph = {
+    'A': [('B', 4), ('C', 2)],
+    'B': [('A', 4), ('C', 1), ('D', 5), ('E', 6)],
+    'C': [('A', 2), ('B', 1), ('D', 8), ('E', 10)],
+    'D': [('B', 5), ('C', 8), ('E', 2)],
+    'E': [('B', 6), ('C', 10), ('D', 2)]
+}
+
+print("=== Dijkstra's Shortest Path (Greedy Algorithm) ===")
+print()
+print("Graph:")
+for node in graph:
+    print(f"  {node} --> {graph[node]}")
+print()
+
+start = 'A'
+dist, came_from = dijkstra(graph, start)
+
+print()
+print("=== Shortest Distances from", start, "===")
+for node in dist:
+    path = get_path(came_from, start, node)
+    print(f"  {start} --> {node}  distance: {dist[node]}  path: {' -> '.join(path)}")

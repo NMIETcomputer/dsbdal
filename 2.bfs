@@ -1,0 +1,33 @@
+from collections import deque
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+def bfs(start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+
+    print("BFS Traversal starting from", start, ":")
+
+    while queue:
+        node = queue.popleft()
+        print("Visited:", node)
+
+        for neighbour in graph[node]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+
+bfs('A')
+
+#   A
+#   / \
+#  B   C
+# / \   \
+#D   E - F
